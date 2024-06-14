@@ -1,3 +1,8 @@
+
+const GIF_LIST = [
+    "gift.jpeg",
+    "img/cat1.gif"
+]
 class Menu {
     constructor() {
       this.imgContainer = document.querySelector('#menu');
@@ -7,16 +12,19 @@ class Menu {
       
       const unopened = "gift.jpeg";
       this.presents = [
-        new Present(this.imgContainer, 'gift.jpeg',this.showButtonClicked),
-        new Present(this.imgContainer, 'gift.jpeg', this.showButtonClicked),
-        new Present(this.imgContainer, 'gift.jpeg', this.showButtonClicked)
+        new Present(this.imgContainer, 'gift.jpeg',this.showButtonClicked,0),
+        new Present(this.imgContainer, 'gift.jpeg', this.showButtonClicked,1),
+        new Present(this.imgContainer, 'gift.jpeg', this.showButtonClicked,1)
       ];
       
       document.addEventListener('click', this.showButtonClicked);
     }
     
-    showButtonClicked(newSrc) {
-      this.statusBar.gifSrc = newSrc;
+    showButtonClicked(index) {
+      // TODO: add condiotional here
+      this.statusBar.textContent = index + ' was clicked';
+      this.image.src = GIF_LIST[1];
+
     }
 }
   /*  Class Present  */
@@ -27,49 +35,38 @@ class Present {
      * @param {*} src_dir the path to the image stc
      * @param {*} onClickedCallback callback param function
      */
-    constructor(containerElement, src_dir, onClickedCallback) {
-      /* 
-         this.containerElement = containerElement;
-      this.gifSrc = gifSrc;
-      this.onClickedCallback = onClickedCallback;
-      
-      this.onClick = this.onClick.bind(this);
-      
-      const image = document.createElement('img');
-      image.src = 'gift.jpeg';
-      button.addEventListener('click', this.onClick);
-      this.containerElement.append(image);
-*/
-   
+    constructor(containerElement, src_dir, onClickedCallback, index) {
 
       // some oop stuff
       this.containerElement = containerElement;
       this.src_dir = src_dir;
       this.onClickedCallback = onClickedCallback;
       this.onClick = this.onClick.bind(this);
+      this.index = index;
+      this.textContent = index;
 
       // create img and allocate src dir
       const image = document.createElement('img');
-      src_dir = "img/gift.jpeg"; //TODO #1 :  change this
-      image.src = src_dir;
+      image.src = GIF_LIST[index];
+
       image.addEventListener('click', () => {
-          this._openPresent(src_dir);
+          this.onClick(index);
       });
-
+      this._openPresent = this._openPresent.bind(this);
       this.containerElement.append(image);
-
+      
 
   }
-  _openPresent(event, source){
-      const image = event.currentTarget;
-      image.src = source || "img/cat1.gif";
-      image.removeEventListener('click', this._openPresent);
-      //event.currentTarget.src = event.currentTarget.src == "img/cat1.gif" ? "img/gift.jpeg" : "img/cat1.gif";
-  }
+    _openPresent(event){
+        const image = event.currentTarget;
+        image.src = GIF_LIST[index]
+        image.removeEventListener('click', this.onClick);
+        //event.currentTarget.src = event.currentTarget.src == "img/cat1.gif" ? "img/gift.jpeg" : "img/cat1.gif";
+    }
   
     
     onClick() {
-        this.onClickedCallback(this.gifSrc);
+        this.onClickedCallback(this.index);
     }
   
   }
