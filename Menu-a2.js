@@ -1,3 +1,10 @@
+// DEVELOPER COMMENTS:
+/*
+It seems like that passing the image index onto the the present object and then alterating the list
+elements to "-1" means that we are not in need of a callback function.
+However, I have left the onClickedCallback parameter in order to allow modification of the code in the future.
+
+*/
 
 const GIF_LIST = [
     "img/cat1.gif",
@@ -68,7 +75,8 @@ class Present {
         const image = event.currentTarget;
         image.src = GIF_LIST[this.index];
         // im not even sure if the callback function is needed here
-        this.onClickedCallback(this.index);
+        // UPDATE: it is not needed
+       // this.onClickedCallback(this.index);
 
         // change src to flag index -1, notifying that the image has been clicked
         GIF_LIST[this.index] = "-1";
