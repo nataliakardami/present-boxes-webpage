@@ -23,8 +23,7 @@ class Menu {
     showButtonClicked(index) {
       // TODO: add condiotional here
       this.statusBar.textContent = index + ' was clicked';
-      this.image.src = GIF_LIST[1];
-
+    
     }
 }
   /*  Class Present  */
@@ -43,30 +42,34 @@ class Present {
       this.onClickedCallback = onClickedCallback;
       this.onClick = this.onClick.bind(this);
       this.index = index;
-      this.textContent = index;
 
       // create img and allocate src dir
       const image = document.createElement('img');
-      image.src = GIF_LIST[index];
+      image.src = src_dir; // this works
 
       image.addEventListener('click', () => {
-          this.onClick(index);
+          this._openPresent("img/cat1.gif");
       });
+      this.containerElement.appendChild(image);
       this._openPresent = this._openPresent.bind(this);
-      this.containerElement.append(image);
+
       
 
   }
     _openPresent(event){
         const image = event.currentTarget;
-        image.src = GIF_LIST[index]
-        image.removeEventListener('click', this.onClick);
+        //console.log(this.index);
+        this.containerElement.src ="img/cat1.gif";
+        // image.removeEventListener('click', this._openPresent);
         //event.currentTarget.src = event.currentTarget.src == "img/cat1.gif" ? "img/gift.jpeg" : "img/cat1.gif";
     }
   
     
-    onClick() {
-        this.onClickedCallback(this.index);
+    onClick(event) {
+        console.log(this.index);
+        event.currentTarget.src = "img/cat1.gif";
+        //this.src_dir = GIF_LIST[this.index];
+        this.onClickedCallback(this);
     }
   
   }
