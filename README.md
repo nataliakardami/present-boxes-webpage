@@ -1,3 +1,3 @@
-# Present Boxes! On JavaScript Mouse Events
+# Present Boxes Webpage! On JavaScript Mouse Events
 ## [ HTML CSS JS ]
-For the course "Web And Mobile Technology" taught at TIU (2024)
+For the course "Web And Mobile Technology" taught at Tokyo International University (2024)
