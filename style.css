@@ -1,12 +1,17 @@
 body {
     font-family: monospace;
     text-align: center;
+    margin-top: 50px;
 }
 img {
     height: 100px;
+    width: 100px;
 }
 
 #menu {
     display: flex;
     justify-content: space-evenly;
+}
+h1{
+    padding: 30px;
 }
