@@ -1,6 +1,5 @@
 
 const GIF_LIST = [
-    "gift.jpeg",
     "img/cat1.gif",
     "img/cat2.gif",
     "img/cat4.gif",
@@ -16,16 +15,17 @@ class Menu {
       this.presents = [
         new Present(this.imgContainer, 'gift.jpeg',this.showButtonClicked,0),
         new Present(this.imgContainer, 'gift.jpeg', this.showButtonClicked,1),
-        new Present(this.imgContainer, 'gift.jpeg', this.showButtonClicked,1)
+        new Present(this.imgContainer, 'gift.jpeg', this.showButtonClicked,2)
       ];
       
       document.addEventListener('click', this.showButtonClicked);
     }
     
-    showButtonClicked(index) {
-      // TODO: add condiotional here
-      this.statusBar.textContent = index + ' was clicked';
-
+    showButtonClicked() {
+      // If all images are clicked, then the array of images will be full of "-1"
+      if (GIF_LIST.every((element) => element === "-1")){
+        this.statusBar.textContent = "Enjoy your presents!";
+      }
     
     }
 }
@@ -61,8 +61,13 @@ class Present {
     onClick(event){
       // call the callback function
         const image = event.currentTarget;
-        image.src = 'img/cat1.gif'
+        image.src = GIF_LIST[this.index];
         this.onClickedCallback(this.index);
+
+        // change src to flag index -1, notifing that the image has been clicked
+        GIF_LIST[this.index] = "-1";
+        console.log(GIF_LIST);
+        image.removeEventListener('click', this.onClick);
   
   }
 }
