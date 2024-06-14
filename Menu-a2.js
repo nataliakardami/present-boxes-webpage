@@ -1,7 +1,9 @@
 
 const GIF_LIST = [
     "gift.jpeg",
-    "img/cat1.gif"
+    "img/cat1.gif",
+    "img/cat2.gif",
+    "img/cat4.gif",
 ]
 class Menu {
     constructor() {
@@ -23,6 +25,7 @@ class Menu {
     showButtonClicked(index) {
       // TODO: add condiotional here
       this.statusBar.textContent = index + ' was clicked';
+
     
     }
 }
@@ -47,30 +50,20 @@ class Present {
       const image = document.createElement('img');
       image.src = src_dir; // this works
 
-      image.addEventListener('click', () => {
-          this._openPresent("img/cat1.gif");
-      });
-      this.containerElement.appendChild(image);
-      this._openPresent = this._openPresent.bind(this);
+      image.addEventListener('click', this.onClick);
+      this.containerElement.appendChild(image); 
 
-      
-
-  }
-    _openPresent(event){
+    }
+    /**
+     * onClick function
+     * @param {*} event 
+     */
+    onClick(event){
+      // call the callback function
         const image = event.currentTarget;
-        //console.log(this.index);
-        this.containerElement.src ="img/cat1.gif";
-        // image.removeEventListener('click', this._openPresent);
-        //event.currentTarget.src = event.currentTarget.src == "img/cat1.gif" ? "img/gift.jpeg" : "img/cat1.gif";
-    }
-  
-    
-    onClick(event) {
-        console.log(this.index);
-        event.currentTarget.src = "img/cat1.gif";
-        //this.src_dir = GIF_LIST[this.index];
-        this.onClickedCallback(this);
-    }
+        image.src = 'img/cat1.gif'
+        this.onClickedCallback(this.index);
   
   }
+}
 new Menu();
