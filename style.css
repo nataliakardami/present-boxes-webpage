@@ -5,3 +5,8 @@ body {
 img {
     height: 100px;
 }
+
+#menu {
+    display: flex;
+    justify-content: space-evenly;
+}
